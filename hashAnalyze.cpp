@@ -7,10 +7,12 @@ void hashAnalyze::show_dupes(dirWalk* classWithMap)
     {
         if(p.second.size() > 1 and classWithMap->options.find("n") != string::npos)
         {
-            dupes_flag = 1;
+            dupes_flag += 1;
             check_names(p.second);
-            if(similarHash.size() <= 1)
+            if(similarHash.size() <= 1){
+                dupes_flag -= 1;
                 continue;
+            }
             cout << "\033[31m" << "Duplicates:\n" << "\033[0m";
             for(string name: similarHash)
                 cout << "\t" << name << endl;
@@ -18,7 +20,7 @@ void hashAnalyze::show_dupes(dirWalk* classWithMap)
         }
         else if(p.second.size() > 1)
         {
-            dupes_flag = 1;
+            dupes_flag += 1;
             cout << "\033[31m" << "Duplicates:\n" << "\033[0m";
             for(string name: p.second)
                 cout << "\t" << name << endl;
@@ -60,15 +62,17 @@ void hashAnalyze::prepare_to_delete(dirWalk* classWithMap)
     {
         if(p.second.size() > 1 and classWithMap->options.find("n") != string::npos)
         {
-            dupes_flag = 1;
+            dupes_flag += 1;
             check_names(p.second);
-            if(similarHash.size() <= 1)
+            if(similarHash.size() <= 1){
+                dupes_flag -= 1;
                 continue;
+            }
             removing.fileDeleting(similarHash);
         }
         else if(p.second.size() > 1)
         {
-            dupes_flag = 1;
+            dupes_flag += 1;
             removing.fileDeleting(p.second);
         }
     }

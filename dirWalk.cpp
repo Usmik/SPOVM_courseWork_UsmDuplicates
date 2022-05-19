@@ -65,8 +65,6 @@ void dirWalk::selectFilesAndHash(string dirName)
             }
         else if(entry->d_type == DT_DIR)
         {
-            // if(path == "/sys" or path == "/proc")
-            //     continue;
             if(path == "/snap" and this->options.find("h") == string::npos)
                 continue;
             if(entry_name[0] == '.' and this->options.find("h") != string::npos)
